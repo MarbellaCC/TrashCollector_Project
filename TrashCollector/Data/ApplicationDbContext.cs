@@ -22,15 +22,15 @@ namespace TrashCollector.Data
                    new IdentityRole
                    {
                        Name = "Customer",
-                       NormalizedName = "Customer"
+                       NormalizedName = "CUSTOMER"
                    },
                    new IdentityRole
                    {
                        Name = "Employee",
-                       NormalizedName = "Employee"
+                       NormalizedName = "EMPLOYEE"
                    });
         }
-        public DbSet<Customer> Customer { get; set; }
-        public DbSet<Employee> Employee { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Employee> Employees { get; set; }
     }
 }

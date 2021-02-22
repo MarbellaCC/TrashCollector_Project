@@ -25,29 +25,27 @@ namespace TrashCollector.Models
         public string State { get; set; }
         
         [Display(Name = "Zip Code")]
+        [DataType(DataType.PostalCode)]
         public int ZipCode { get; set; }
 
         [Display(Name = "Pick Up Day")]
-        public string PickUpDay { get; set; }
+        public DayOfWeek PickUpDay { get; set; }
 
-        [DisplayFormat(DataFormatString = "0:dd MM yyyy")]
         [Display(Name = "Extra Pickup Date")]
         [DataType(DataType.Date)]
         public DateTime? ExtraPickupDate { get; set; }
 
-        [DisplayFormat(DataFormatString = "0:dd MM yyyy")]
         [Display(Name = "Suspension Starting Date")]
         [DataType(DataType.Date)]
         public DateTime? SuspensionStartDate { get; set; }
 
-        [DisplayFormat(DataFormatString = "0:dd MM yyyy")]
         [Display(Name = "Suspension End Date")]
         [DataType(DataType.Date)]
         public DateTime? SuspensionEndDate { get; set; }
 
         [Display(Name = "Amount Due")]
         [DataType(DataType.Currency)]
-        public double AmountDue { get; set; }
+        public double? AmountDue { get; set; }
 
         [ForeignKey("IdentityUser")]
         public string IdentityUserId { get; set; }
