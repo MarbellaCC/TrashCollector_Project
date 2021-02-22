@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TrashCollector.Data;
 
 namespace TrashCollector.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210222151725_Migration4")]
+    partial class Migration4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,15 +50,15 @@ namespace TrashCollector.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "530abfdc-3780-49ac-ab38-ab035f7bec8f",
-                            ConcurrencyStamp = "134fbd9f-780f-4496-9fa8-13133c2e5480",
+                            Id = "a2877fab-bec1-41ef-8d9d-18b1a13c7cd6",
+                            ConcurrencyStamp = "6dcfb038-0786-4a47-99b8-4765e9bd370a",
                             Name = "Customer",
                             NormalizedName = "Customer"
                         },
                         new
                         {
-                            Id = "4fdc5627-4185-4728-9b98-2855161b55a9",
-                            ConcurrencyStamp = "61ad043c-4068-4290-a598-9e09322daf2a",
+                            Id = "c8f6ceee-78c2-4080-91bb-04ed140c45b2",
+                            ConcurrencyStamp = "a6d97a9e-d5a3-4dd0-ac5c-0bc2183d32f6",
                             Name = "Employee",
                             NormalizedName = "Employee"
                         });
@@ -265,10 +267,10 @@ namespace TrashCollector.Data.Migrations
                     b.Property<string>("StreetAddress")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("SuspensionEndDate")
+                    b.Property<DateTime?>("SupensionStartDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("SuspensionStartDate")
+                    b.Property<DateTime?>("SuspensionEndDate")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("ZipCode")
