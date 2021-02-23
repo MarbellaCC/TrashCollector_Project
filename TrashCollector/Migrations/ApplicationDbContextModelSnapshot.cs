@@ -3,17 +3,15 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TrashCollector.Data;
 
-namespace TrashCollector.Data.Migrations
+namespace TrashCollector.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210222042107_Migration3")]
-    partial class Migration3
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,17 +48,17 @@ namespace TrashCollector.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "985a72a4-8d9b-4eec-9cb9-b74877758958",
-                            ConcurrencyStamp = "237a62b6-6a0b-4588-a557-dd880982afbd",
+                            Id = "9bcdab7b-564d-4966-b9a1-9b1b6ce75bb0",
+                            ConcurrencyStamp = "dede2fa7-a3d3-41eb-9db8-49c776bc1f74",
                             Name = "Customer",
-                            NormalizedName = "Customer"
+                            NormalizedName = "CUSTOMER"
                         },
                         new
                         {
-                            Id = "8f5c1932-8a97-44db-ad46-3643a2a271f5",
-                            ConcurrencyStamp = "eb7eb372-4f9c-4237-8a04-cd33013640eb",
+                            Id = "e30f029e-8cdc-4241-9e9d-d98ecbf497f8",
+                            ConcurrencyStamp = "7a27afe2-c77c-490e-a76f-1dd7e44d4e9e",
                             Name = "Employee",
-                            NormalizedName = "Employee"
+                            NormalizedName = "EMPLOYEE"
                         });
                 });
 
@@ -240,11 +238,14 @@ namespace TrashCollector.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<double>("AmountDue")
+                    b.Property<double?>("AmountDue")
                         .HasColumnType("float");
 
                     b.Property<string>("City")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ExtraPickupDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
@@ -255,14 +256,20 @@ namespace TrashCollector.Data.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PickUpDay")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("PickupDay")
+                        .HasColumnType("int");
 
                     b.Property<string>("State")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("StreetAddress")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("SuspensionEndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("SuspensionStartDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("ZipCode")
                         .HasColumnType("int");
@@ -271,7 +278,59 @@ namespace TrashCollector.Data.Migrations
 
                     b.HasIndex("IdentityUserId");
 
-                    b.ToTable("Customer");
+                    b.ToTable("Customers");
+                });
+
+            modelBuilder.Entity("TrashCollector.Models.Day", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Days");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Sunday"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Monday"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Tuesday"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Wednesday"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Thursday"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "Friday"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Name = "Saturday"
+                        });
                 });
 
             modelBuilder.Entity("TrashCollector.Models.Employee", b =>
@@ -302,7 +361,7 @@ namespace TrashCollector.Data.Migrations
 
                     b.HasIndex("IdentityUserId");
 
-                    b.ToTable("Employee");
+                    b.ToTable("Employees");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

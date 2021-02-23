@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -25,11 +26,10 @@ namespace TrashCollector.Models
         public string State { get; set; }
         
         [Display(Name = "Zip Code")]
-        [DataType(DataType.PostalCode)]
         public int ZipCode { get; set; }
 
         [Display(Name = "Pick Up Day")]
-        public DayOfWeek PickUpDay { get; set; }
+        public DayOfWeek PickupDay { get; set; }
 
         [Display(Name = "Extra Pickup Date")]
         [DataType(DataType.Date)]

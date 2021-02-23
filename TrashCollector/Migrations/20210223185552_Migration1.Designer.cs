@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TrashCollector.Data;
 
-namespace TrashCollector.Data.Migrations
+namespace TrashCollector.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210222211105_Migration6")]
-    partial class Migration6
+    [Migration("20210223185552_Migration1")]
+    partial class Migration1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -50,15 +50,15 @@ namespace TrashCollector.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "8624d2ba-336d-40b4-a484-11d18012c993",
-                            ConcurrencyStamp = "5ffd6e34-f3c2-40a1-a8c7-3489ec84ad5f",
+                            Id = "9bcdab7b-564d-4966-b9a1-9b1b6ce75bb0",
+                            ConcurrencyStamp = "dede2fa7-a3d3-41eb-9db8-49c776bc1f74",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
-                            Id = "1169bfeb-5383-42a6-8973-2f3441d36345",
-                            ConcurrencyStamp = "8c439800-fadb-49a9-883a-490bf9a3d905",
+                            Id = "e30f029e-8cdc-4241-9e9d-d98ecbf497f8",
+                            ConcurrencyStamp = "7a27afe2-c77c-490e-a76f-1dd7e44d4e9e",
                             Name = "Employee",
                             NormalizedName = "EMPLOYEE"
                         });
@@ -240,7 +240,7 @@ namespace TrashCollector.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<double>("AmountDue")
+                    b.Property<double?>("AmountDue")
                         .HasColumnType("float");
 
                     b.Property<string>("City")
@@ -258,7 +258,7 @@ namespace TrashCollector.Data.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PickUpDay")
+                    b.Property<int?>("PickupDay")
                         .HasColumnType("int");
 
                     b.Property<string>("State")
@@ -281,6 +281,58 @@ namespace TrashCollector.Data.Migrations
                     b.HasIndex("IdentityUserId");
 
                     b.ToTable("Customers");
+                });
+
+            modelBuilder.Entity("TrashCollector.Models.Day", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Days");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Sunday"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Monday"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Tuesday"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Wednesday"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Thursday"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "Friday"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Name = "Saturday"
+                        });
                 });
 
             modelBuilder.Entity("TrashCollector.Models.Employee", b =>

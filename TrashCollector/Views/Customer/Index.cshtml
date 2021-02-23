@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TrashCollector.Models.Customer>
+﻿@model TrashCollector.Models.Customer
 
 @{
     ViewData["Title"] = "Index";
@@ -8,7 +8,7 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Add Property</a>
 </p>
 <table class="table">
     <thead>
@@ -32,7 +32,7 @@
                 @Html.DisplayNameFor(model => model.ZipCode)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PickUpDay)
+                @Html.DisplayNameFor(model => model.PickupDay)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.ExtraPickupDate)
@@ -53,48 +53,48 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
+                @Html.DisplayFor(model => model.FirstName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.LastName)
+                @Html.DisplayFor(model => model.LastName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.StreetAddress)
+                @Html.DisplayFor(model => model.StreetAddress)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.City)
+                @Html.DisplayFor(model => model.City)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.State)
+                @Html.DisplayFor(model => model.State)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ZipCode)
+                @Html.DisplayFor(model => model.ZipCode)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PickUpDay)
-            </td>
-            <th>
-                @Html.DisplayFor(modelItem => item.ExtraPickupDate)
-            </th>
-            <th>
-                @Html.DisplayFor(modelItem => item.SuspensionStartDate)
-            </th>
-            <th>
-                @Html.DisplayFor(modelItem => item.SuspensionEndDate)
-            </th>
-            <td>
-                @Html.DisplayFor(modelItem => item.AmountDue)
+                @Html.DisplayFor(model => model.PickupDay)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdentityUser.Id)
+                @Html.DisplayFor(model => model.ExtraPickupDate)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                @Html.DisplayFor(model => model.SuspensionStartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.SuspensionEndDate)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.AmountDue)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.IdentityUser.Id)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@Model.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
             </td>
         </tr>
 }
