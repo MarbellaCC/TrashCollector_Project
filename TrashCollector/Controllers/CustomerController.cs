@@ -24,7 +24,7 @@ namespace TrashCollector.Controllers
         public IActionResult Index()
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var customer = _context.Customers.Where(c => c.IdentityUserId == userId).FirstOrDefault();
+            var customer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
             if (customer == null)
             {
                 return RedirectToAction("Create");
@@ -35,14 +35,9 @@ namespace TrashCollector.Controllers
         // GET: Customer/Details/5
         public IActionResult Details(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
 
-            var customer = _context.Customers
-                .Include(c => c.IdentityUser)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var customer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
             if (customer == null)
             {
                 return NotFound();
