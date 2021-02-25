@@ -59,13 +59,13 @@ namespace TrashCollector.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("Id,FirstName,LastName,StreetAddress,City,State,ZipCode,PickUpDay,ExtraPickupDate,SuspensionStartDate,SuspensionEndDate,AmountDue,IdentityUserId")] Customer customer)
+        public IActionResult Create(Customer customer)
         {
             if (ModelState.IsValid)
             {
                 var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
                 customer.IdentityUserId = userId;
-                _context.Add(customer);
+                _context.Customers.Add(customer);
                 _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
@@ -95,7 +95,7 @@ namespace TrashCollector.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,StreetAddress,City,State,ZipCode,PickUpDay,ExtraPickupDate,SuspensionStartDate,SuspensionEndDate,AmountDue,IdentityUserId")] Customer customer)
+        public async Task<IActionResult> Edit(int id, Customer customer)
         {
             if (id != customer.Id)
             {

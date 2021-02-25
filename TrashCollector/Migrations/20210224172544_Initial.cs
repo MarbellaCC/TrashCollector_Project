@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TrashCollector.Migrations
 {
-    public partial class Migration1 : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -177,7 +177,7 @@ namespace TrashCollector.Migrations
                     City = table.Column<string>(nullable: true),
                     State = table.Column<string>(nullable: true),
                     ZipCode = table.Column<int>(nullable: false),
-                    PickupDay = table.Column<int>(nullable: true),
+                    PickupDay = table.Column<int>(nullable: false),
                     ExtraPickupDate = table.Column<DateTime>(nullable: true),
                     SuspensionStartDate = table.Column<DateTime>(nullable: true),
                     SuspensionEndDate = table.Column<DateTime>(nullable: true),
@@ -227,25 +227,12 @@ namespace TrashCollector.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[,]
-                {
-                    { "9bcdab7b-564d-4966-b9a1-9b1b6ce75bb0", "dede2fa7-a3d3-41eb-9db8-49c776bc1f74", "Customer", "CUSTOMER" },
-                    { "e30f029e-8cdc-4241-9e9d-d98ecbf497f8", "7a27afe2-c77c-490e-a76f-1dd7e44d4e9e", "Employee", "EMPLOYEE" }
-                });
+                values: new object[] { "9acb2860-625b-43f2-8e8a-2a0a083f4436", "a565034a-ebae-4df1-a2e0-df4da01acf0d", "Customer", "CUSTOMER" });
 
             migrationBuilder.InsertData(
-                table: "Days",
-                columns: new[] { "Id", "Name" },
-                values: new object[,]
-                {
-                    { 1, "Sunday" },
-                    { 2, "Monday" },
-                    { 3, "Tuesday" },
-                    { 4, "Wednesday" },
-                    { 5, "Thursday" },
-                    { 6, "Friday" },
-                    { 7, "Saturday" }
-                });
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[] { "31004a20-55a3-4a14-89f1-5026172da94e", "586773b2-9821-4302-87a2-4cf94fab7426", "Employee", "EMPLOYEE" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

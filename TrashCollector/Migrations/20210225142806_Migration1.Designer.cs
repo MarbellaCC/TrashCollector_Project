@@ -10,7 +10,7 @@ using TrashCollector.Data;
 namespace TrashCollector.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210223185552_Migration1")]
+    [Migration("20210225142806_Migration1")]
     partial class Migration1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -50,15 +50,15 @@ namespace TrashCollector.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "9bcdab7b-564d-4966-b9a1-9b1b6ce75bb0",
-                            ConcurrencyStamp = "dede2fa7-a3d3-41eb-9db8-49c776bc1f74",
+                            Id = "fb4141c0-5356-4ec9-8519-e59fc75b3d81",
+                            ConcurrencyStamp = "29c5c144-ebe0-4efc-b1c3-41616da66479",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
-                            Id = "e30f029e-8cdc-4241-9e9d-d98ecbf497f8",
-                            ConcurrencyStamp = "7a27afe2-c77c-490e-a76f-1dd7e44d4e9e",
+                            Id = "8aae34e3-f232-40b1-8264-2da87411350d",
+                            ConcurrencyStamp = "b8b33ba7-905e-4d92-8ce6-c090011507fd",
                             Name = "Employee",
                             NormalizedName = "EMPLOYEE"
                         });
@@ -258,7 +258,7 @@ namespace TrashCollector.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("PickupDay")
+                    b.Property<int>("PickupDay")
                         .HasColumnType("int");
 
                     b.Property<string>("State")
@@ -296,43 +296,6 @@ namespace TrashCollector.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Days");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Sunday"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Monday"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Tuesday"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Name = "Wednesday"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Name = "Thursday"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Name = "Friday"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Name = "Saturday"
-                        });
                 });
 
             modelBuilder.Entity("TrashCollector.Models.Employee", b =>
@@ -341,9 +304,6 @@ namespace TrashCollector.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("int");
 
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
@@ -358,8 +318,6 @@ namespace TrashCollector.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CustomerId");
 
                     b.HasIndex("IdentityUserId");
 
@@ -426,12 +384,6 @@ namespace TrashCollector.Migrations
 
             modelBuilder.Entity("TrashCollector.Models.Employee", b =>
                 {
-                    b.HasOne("TrashCollector.Models.Customer", "Customer")
-                        .WithMany()
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
                         .WithMany()
                         .HasForeignKey("IdentityUserId");
