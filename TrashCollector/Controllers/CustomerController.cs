@@ -65,7 +65,7 @@ namespace TrashCollector.Controllers
             {
                 var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
                 customer.IdentityUserId = userId;
-                _context.Customers.Add(customer);
+                _context.Add(customer);
                 _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
@@ -74,13 +74,8 @@ namespace TrashCollector.Controllers
         }
 
         // GET: Customer/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
             var customer = await _context.Customers.FindAsync(id);
             if (customer == null)
             {

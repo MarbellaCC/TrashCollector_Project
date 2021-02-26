@@ -7,9 +7,6 @@
 
 <h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Add Property</a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -33,15 +30,6 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.PickupDay)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ExtraPickupDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SuspensionStartDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SuspensionEndDate)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.AmountDue)
@@ -72,15 +60,6 @@
             </td>
             <td>
                 @Html.DisplayFor(model => model.PickupDay)
-            </td>
-            <td>
-                @Html.DisplayFor(model => model.ExtraPickupDate)
-            </td>
-            <td>
-                @Html.DisplayFor(model => model.SuspensionStartDate)
-            </td>
-            <td>
-                @Html.DisplayFor(model => model.SuspensionEndDate)
             </td>
             <td>
                 @Html.DisplayFor(model => model.AmountDue)

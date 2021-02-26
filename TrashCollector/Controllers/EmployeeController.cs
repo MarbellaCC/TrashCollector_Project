@@ -12,7 +12,7 @@ using TrashCollector.Models;
 
 namespace TrashCollector.Controllers
 {
-    [Authorize(Roles = "Employee")]
+    //[Authorize(Roles = "Employee")]
     public class EmployeeController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -25,13 +25,14 @@ namespace TrashCollector.Controllers
         // GET: Employees
         public IActionResult Index()
         {
+            var applicationDbContext = _context.Employees.Include(e => e.IdentityUser);
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var employee = _context.Employees.Where(e => e.IdentityUserId == userId).SingleOrDefault();
+            var employee = _context.Employees.Where(e => e.IdentityUserId == userId).FirstOrDefault();
             if (employee == null)
             {
-                var customerInfo = _context.Customers;
-                return View(customerInfo);
-
+                //var customerInfo = _context.Customers;
+                //return View(customerInfo);
+                return RedirectToAction("Create");
             }
 
             //filter out customer list w employee zip and pickups scheduled for today
@@ -53,16 +54,13 @@ namespace TrashCollector.Controllers
                 return NotFound();
             }
 
-            var employee = await _context.Employees
-                //.Include(e => e.Customer)
-                .Include(e => e.IdentityUser)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (employee == null)
+            var customer = await _context.Customers.Include(e => e.IdentityUser).FirstOrDefaultAsync(m => m.Id == id);
+
+            if (customer == null)
             {
                 return NotFound();
             }
-
-            return View(employee);
+            return View(customer);
         }
 
         // GET: Employees/Create
@@ -177,9 +175,64 @@ namespace TrashCollector.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+
+
         private bool EmployeeExists(int id)
         {
             return _context.Employees.Any(e => e.Id == id);
+        }
+
+        
+        
+        
+        
+
+        //public ActionResult ConfirmPickup(int id)
+        //{
+        //    var customer = _context.Customers.Include(e => e.IdentityUser).FirstOrDefault(m => m.Id == id);
+        //    customer.AmountDue += 50.00;
+        //    _context.Customers.Update(customer);
+        //    _context.SaveChanges();
+        //    return View(customer);
+        //}
+
+        // GET: Customer/Edit/5
+        public async Task<IActionResult> ConfirmPickup(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var customer = await _context.Customers.FindAsync(id);
+            if (customer == null)
+            {
+                return NotFound();
+            }
+            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", customer.IdentityUserId);
+            return View(customer);
+        }
+
+        // POST: Customer/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ConfirmPickup(int id, Customer customer)
+        {
+            if (id != customer.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                _context.Update(customer);
+                _context.SaveChanges();
+                return RedirectToAction(nameof(Index));
+            }
+            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", customer.IdentityUserId);
+            return View(customer);
         }
     }
 }

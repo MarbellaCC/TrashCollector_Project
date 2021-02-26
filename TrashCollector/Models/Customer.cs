@@ -22,7 +22,9 @@ namespace TrashCollector.Models
 
         [Display(Name = "Street Address")]
         public string StreetAddress { get; set; }
+
         public string City { get; set; }
+
         public string State { get; set; }
         
         [Display(Name = "Zip Code")]
@@ -46,6 +48,8 @@ namespace TrashCollector.Models
         [Display(Name = "Amount Due")]
         [DataType(DataType.Currency)]
         public double? AmountDue { get; set; }
+
+        public bool TrashPickedUp { get; set; }
 
         [ForeignKey("IdentityUser")]
         public string IdentityUserId { get; set; }
